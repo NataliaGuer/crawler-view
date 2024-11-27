@@ -1,0 +1,18 @@
+<form id="input-component_container" action="" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  
+  <input type="text" pInputText variant="filled" placeholder="Enter website URL" formControlName="url"/>
+  
+  <p-floatLabel>
+    <p-dropdown 
+      [options]="availableDepths"
+      placeholder="Depth"
+      inputId="depth-select"
+      formControlName="depth"
+    > 
+    </p-dropdown>
+    <label for="depth-select">Depth</label>
+  </p-floatLabel>
+
+  <p-button type="submit" label="Submit" [disabled]="!userForm.valid"/>
+
+</form>
