@@ -2,6 +2,7 @@ import { isPlatformServer } from '@angular/common';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { PanelModule } from 'primeng/panel';
+import { io } from 'socket.io-client';
 
 @Component({
   selector: 'app-link-graph',
@@ -15,7 +16,11 @@ export class LinkGraphComponent {
   nodes: GraphNode[] = [
     {
       id: '1',
-      label: 'Abbbbb',
+      label: 'Abbab',
+    },
+    {
+      id: '2',
+      label: 'test',
     },
   ];
 
@@ -36,6 +41,25 @@ export class LinkGraphComponent {
 
   constructor(@Inject(PLATFORM_ID) private platformId: object) {
     this.isServer = isPlatformServer(this.platformId);
+  }
+
+  ngOnInit() {
+    // const socket = io('ws://localhost:3004');
+    // socket.on('new-node', (arg) => {
+    //   this.nodes.push({
+    //     id: arg.id,
+    //     label: arg.label,
+    //   });
+
+    //   if (arg.parent) {
+    //     this.links.push({
+    //       id: `${arg.parent}-${arg.id}`,
+    //       source: arg.parent,
+    //       target: arg.id,
+    //       label: ''
+    //     })
+    //   }
+    // });
   }
 }
 

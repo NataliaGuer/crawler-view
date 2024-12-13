@@ -13,6 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { HttpClient } from '@angular/common/http';
+import { catchError, of, take } from 'rxjs';
 
 @Component({
   selector: 'app-input',
@@ -46,6 +47,21 @@ export class InputComponent {
 
   onSubmit() {
     console.log(this.userForm.value);
+    this.http
+      .post('localhost:3002/api/jobs', {
+        url: this.userForm.value.url,
+        depth: this.userForm.value.depth,
+      })
+      .pipe(
+        take(1),
+        catchError((err) => of(err))
+      )
+      .subscribe((res: string | number) => {
+        if (typeof res === 'string') {
+          console.log(res);
+          return;
+        }
+      });
   }
 }
 
